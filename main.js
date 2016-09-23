@@ -3,6 +3,7 @@ var mainState = {
     game.load.image('player', 'assets/player.png');
     game.load.image('wallV', 'assets/wallVertical.png');
     game.load.image('wallH', 'assets/wallHorizontal.png');
+    game.load.image('coin', 'assets/coin.png');
   },
 
   create: function() {
@@ -14,7 +15,12 @@ var mainState = {
     this.player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
     this.player.anchor.setTo(0.5, 0.5);
 
+    this.coin = game.add.sprite(60, 140, 'coin');
+    this.coin.anchor.setTo(0.5, 0.5);
+
     game.physics.arcade.enable(this.player);
+    game.physics.arcade.enable(this.coin);
+
 
     this.player.body.gravity.y = 500;
   },
