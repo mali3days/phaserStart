@@ -31,6 +31,7 @@ var mainState = {
 
   update: function() {
     game.physics.arcade.collide(this.player, this.walls);
+    game.physics.arcade.overlap(this.player, this.coin, this.takeCoin, null, this);
     this.movePlayer();
 
     if (!this.player.inWorld) {
@@ -80,6 +81,12 @@ var mainState = {
 
   playerDie: function() {
     game.state.start('main');
+  },
+
+  takeCoin: function(player, coin) {
+    this.killCoin();
+    this.score += 5;
+    this.scoreLabel.text = 'score: ' + this.score;
   }
 };
 
