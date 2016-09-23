@@ -84,9 +84,29 @@ var mainState = {
   },
 
   takeCoin: function(player, coin) {
-    this.killCoin();
     this.score += 5;
     this.scoreLabel.text = 'score: ' + this.score;
+
+    this.updateCoinPosition();
+  },
+
+  updateCoinPosition: function() {
+    var coinPosition = [
+      {x: 140, y: 60}, {x: 360, y: 60},
+      {x: 60, y: 140}, {x: 440, y: 140},
+      {x: 130, y: 300}, {x: 370, y: 300}
+    ];
+
+    for (var i = 0; i < coinPosition.length; i++) {
+      if (coinPosition[i].x === this.coin.x) {
+        coinPosition.splice(i, 1);
+      }
+    }
+    var newPosition = coinPosition[
+      game.rnd.integerInRange(0, coinPosition.length - 1)
+    ];
+
+    this.coin.reset(newPosition.x, newPosition.y);
   }
 };
 
