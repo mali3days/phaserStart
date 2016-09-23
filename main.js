@@ -21,8 +21,12 @@ var mainState = {
     game.physics.arcade.enable(this.player);
     game.physics.arcade.enable(this.coin);
 
-
     this.player.body.gravity.y = 500;
+
+    this.scoreLabel = game.add.text(30, 30, 'score: 0', {
+      font: '18px Arial', fill: '#fffffff'
+    });
+    this.score = 0;
   },
 
   update: function() {
