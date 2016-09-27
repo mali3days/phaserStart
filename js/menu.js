@@ -9,7 +9,7 @@ var menuState = {
     nameLabel.anchor.setTo(0.5, 0.5);
 
     var scoreLabel = game.add.text(game.world.centerX, game.world.centerY,
-      'score' + game.global.score,
+      'score: ' + game.global.score,
       {  font: '25px Arial', fill: '#ffffff' }
     );
     scoreLabel.anchor.setTo(0.5, 0.5);
