@@ -8,13 +8,13 @@ var loadState = {
 
     var progressBar = game.add.sprite(game.world.centerX, 200, 'progressBar');
     progressBar.anchor.setTo(0.5, 0.5);
-    game.load.setPreoadSprite(progressBar);
+    game.load.setPreloadSprite(progressBar);
 
     game.load.image('player', 'assets/player.png');
-    game.load.image('player', 'assets/player.png');
+    game.load.image('enemy', 'assets/enemy.png');
     game.load.image('coin', 'assets/coin.png');
-    game.load.image('wasllV', 'assets/wallVertical.png');
-    game.load.image('wasllH', 'assets/wallHorizontal.png');
+    game.load.image('wallV', 'assets/wallVertical.png');
+    game.load.image('wallH', 'assets/wallHorizontal.png');
     game.load.image('background', 'assets/background.png');
   },
 
