@@ -32,9 +32,10 @@ var playState = {
     game.physics.arcade.enable(this.coin);
 
     this.scoreLabel = game.add.text(30, 30, 'score: 0', {
-      font: '18px Arial', fill: '#fffffff'
+      font: '18px Arial',
+      fill: '#fffffff'
     });
-    game.global.score= 0;
+    game.global.score = 0;
 
     this.createWorld();
     game.time.events.loop(2200, this.addEnemy, this);
@@ -57,12 +58,10 @@ var playState = {
     if (this.cursor.left.isDown) {
       this.player.body.velocity.x = -200;
       this.player.animations.play('left');
-    }
-    else if (this.cursor.right.isDown) {
+    } else if (this.cursor.right.isDown) {
       this.player.body.velocity.x = 200;
       this.player.animations.play('right');
-    }
-    else {
+    } else {
       this.player.body.velocity.x = 0;
       this.player.animations.stop();
       this.player.frame = 0;
@@ -102,18 +101,49 @@ var playState = {
   },
 
   takeCoin: function(player, coin) {
-    game.global.score+= 5;
+    game.global.score += 5;
     this.scoreLabel.text = 'score: ' + game.global.score;
+    this.coin.scale.setTo(0, 0);
+    game.add.tween(this.coin.scale)
+      .to({
+        x: 1,
+        y: 1
+      }, 300)
+      .start();
+    game.add.tween(this.player.scale)
+      .to({
+        x: 1.3,
+        y: 1.3
+      })
+      .to({
+        x: 1,
+        y: 1
+      }, 150)
+      .start();
     this.coinSound.play();
     this.updateCoinPosition();
   },
 
   updateCoinPosition: function() {
-    var coinPosition = [
-      {x: 140, y: 60}, {x: 360, y: 60},
-      {x: 60, y: 140}, {x: 440, y: 140},
-      {x: 130, y: 300}, {x: 370, y: 300}
-    ];
+    var coinPosition = [{
+      x: 140,
+      y: 60
+    }, {
+      x: 360,
+      y: 60
+    }, {
+      x: 60,
+      y: 140
+    }, {
+      x: 440,
+      y: 140
+    }, {
+      x: 130,
+      y: 300
+    }, {
+      x: 370,
+      y: 300
+    }];
 
     for (var i = 0; i < coinPosition.length; i++) {
       if (coinPosition[i].x === this.coin.x) {
