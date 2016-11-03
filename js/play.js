@@ -3,7 +3,6 @@ var playState = {
   create: function() {
     this.cursor = game.input.keyboard.createCursorKeys();
 
-
     this.player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
     this.player.animations.add('right', [1, 2], 8, true);
     this.player.animations.add('left', [3, 4], 8, true);
@@ -36,6 +35,12 @@ var playState = {
       fill: '#fffffff'
     });
     game.global.score = 0;
+
+    this.emitter = game.add.emitter(0, 0, 15);
+    this.emitter.makeParticles('pixel');
+    this.emitter.setYSpeed(-150, 150);
+    this.emitter.setXSpeed(-150, 150);
+    this.emitter.gravity = 0;
 
     this.createWorld();
     game.time.events.loop(2200, this.addEnemy, this);
@@ -95,8 +100,20 @@ var playState = {
   },
 
   playerDie: function() {
+    if (!this.player.alive) return;
+
+    this.player.kill();
+
+    this.emitter.x = this.player.x;
+    this.emitter.y = this.player.y;
+    this.emitter.start(true, 600, null, 15);
+
     this.deadSound.play();
     this.music.stop();
+    game.time.events.add(1000, this.startMenu, this);
+  },
+
+  startMenu: function() {
     game.state.start('menu');
   },
 
