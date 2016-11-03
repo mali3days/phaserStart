@@ -11,6 +11,8 @@ var loadState = {
     game.load.setPreloadSprite(progressBar);
 
     game.load.spritesheet('player', 'assets/player2.png', 20, 20);
+    game.load.spritesheet('mute', 'assets/muteButton.png', 28, 22);
+
     game.load.image('enemy', 'assets/enemy.png');
     game.load.image('coin', 'assets/coin.png');
     game.load.image('wallV', 'assets/wallVertical.png');

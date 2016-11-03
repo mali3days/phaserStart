@@ -40,10 +40,21 @@ var menuState = {
     if (game.global.score > localStorage.getItem('bestScore')) {
       localStorage.setItem('bestScore', game.global.score);
     }
+
+    this.muteButton = game.add.button(20, 20, 'mute', this.toggleSound, this);
+    this.muteButton.input.useHandCursor = true;
+    if (game.sound.mute) {
+      this.muteButton.frame = 1;
+    }
   },
 
   start: function() {
     game.state.start('play');
+  },
+
+  toggleSound: function() {
+    game.sound.mute = !game.sound.mute;
+    this.muteButton.frame = game.sound.mute ? 1 : 0;
   }
 
 };
