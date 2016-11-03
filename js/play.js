@@ -43,7 +43,7 @@ var playState = {
     this.emitter.gravity = 0;
 
     this.createWorld();
-    game.time.events.loop(2200, this.addEnemy, this);
+    this.nextEnemy = 0;
   },
 
   update: function() {
@@ -53,6 +53,17 @@ var playState = {
     game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
 
     this.movePlayer();
+
+    if (this.nextEnemy < game.time.now) {
+      var start = 4000,
+            end = 1000,
+          score = 100;
+
+      var delay = Math.max(start - (start - end) * game.global.score/score, end);
+
+      this.addEnemy();
+      this.nextEnemy = game.time.now + delay;
+    }
 
     if (!this.player.inWorld) {
       this.playerDie();
