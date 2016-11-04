@@ -77,10 +77,19 @@ var playState = {
       this.nextEnemy = game.time.now + delay;
     }
 
+    // this.enemies.forEachAlive(this.checkPosition, this);
+
     if (!this.player.inWorld) {
       this.playerDie();
     }
   },
+
+  // TODO: need to improve killing the enemy by jumping on their head
+  // checkPosition: function(enemy) {
+  //   if ((enemy.y > this.player.y) && this.player.body.touching.down) {
+  //     enemy.kill();
+  //   }
+  // },
 
   movePlayer: function() {
     if (this.cursor.left.isDown || this.wasd.left.isDown) {
