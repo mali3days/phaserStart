@@ -52,9 +52,9 @@ var playState = {
     this.nextEnemy = 0;
 
     this.wasd = {
-      up: game.input.keyboard.addKey(Phaser.keyboard.W),
-      left: game.input.keyboard.addKey(Phaser.keyboard.A),
-      right: game.input.keyboard.addKey(Phaser.keyboard.D)
+      up: game.input.keyboard.addKey(Phaser.Keyboard.W),
+      left: game.input.keyboard.addKey(Phaser.Keyboard.A),
+      right: game.input.keyboard.addKey(Phaser.Keyboard.D)
     };
   },
 
@@ -95,7 +95,7 @@ var playState = {
       this.player.frame = 0;
     }
 
-    if (this.cursor.up.isDown ||  this.wasd.up.isDown && this.player.body.touching.down) {
+    if ((this.cursor.up.isDown ||  this.wasd.up.isDown) && this.player.body.touching.down) {
       this.jumpSound.play();
       this.player.body.velocity.y = -320;
     }
