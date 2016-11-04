@@ -2,6 +2,12 @@ var playState = {
 
   create: function() {
     this.cursor = game.input.keyboard.createCursorKeys();
+    game.input.keyboard.addKeyCapture([
+      Phaser.Keyboard.UP,
+      Phaser.Keyboard.DOWN,
+      Phaser.Keyboard.LEFT,
+      Phaser.Keyboard.RIGHT,
+    ]);
 
     this.player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
     this.player.animations.add('right', [1, 2], 8, true);
