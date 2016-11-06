@@ -59,9 +59,9 @@ var playState = {
   },
 
   update: function() {
-    game.physics.arcade.collide(this.player, this.walls);
+    game.physics.arcade.collide(this.player, this.layer);
     game.physics.arcade.overlap(this.player, this.coin, this.takeCoin, null, this);
-    game.physics.arcade.collide(this.enemies, this.walls);
+    game.physics.arcade.collide(this.enemies, this.layer);
     game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
 
     this.movePlayer();
@@ -104,31 +104,18 @@ var playState = {
       this.player.frame = 0;
     }
 
-    if ((this.cursor.up.isDown ||  this.wasd.up.isDown) && this.player.body.touching.down) {
+    if ((this.cursor.up.isDown ||  this.wasd.up.isDown) && this.player.body.onFloor()) {
       this.jumpSound.play();
       this.player.body.velocity.y = -320;
     }
   },
 
   createWorld: function() {
-    this.walls = game.add.group();
-    this.walls.enableBody = true;
-
-    game.add.sprite(0, 0, 'wallV', 0, this.walls);
-    game.add.sprite(480, 0, 'wallV', 0, this.walls);
-    game.add.sprite(0, 0, 'wallH', 0, this.walls);
-    game.add.sprite(300, 0, 'wallH', 0, this.walls);
-    game.add.sprite(0, 320, 'wallH', 0, this.walls);
-    game.add.sprite(300, 320, 'wallH', 0, this.walls);
-    game.add.sprite(-100, 160, 'wallH', 0, this.walls);
-    game.add.sprite(400, 160, 'wallH', 0, this.walls);
-
-    var middleTop = game.add.sprite(100, 80, 'wallH', 0, this.walls);
-    middleTop.scale.setTo(1.5, 1);
-    var middleBottom = game.add.sprite(100, 240, 'wallH', 0, this.walls);
-    middleBottom.scale.setTo(1.5, 1);
-
-    this.walls.setAll('body.immovable', true);
+    this.map = game.add.tilemap('map');
+    this.map.addTilesetImage('tileset');
+    this.layer = this.map.createLayer('Tile Layer 1');
+    this.layer.resizeWorld();
+    this.map.setCollision(1);
   },
 
   playerDie: function() {
