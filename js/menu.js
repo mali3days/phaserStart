@@ -18,9 +18,14 @@ var menuState = {
     );
     scoreLabel.anchor.setTo(0.5, 0.5);
 
+    if (game.device.desktop) {
+      var text = 'press the up arrow key to start';
+    } else {
+      var text = 'touch the screen to start';
+    }
+
     var startLabel = game.add.text(game.world.centerX, game.world.height-80,
-      'press the up arrow key to start',
-      { font: '25px Arial', fill: '#ffffff' }
+      text, { font: '25px Arial', fill: '#ffffff' }
     );
     startLabel.anchor.setTo(0.5, 0.5);
 
@@ -32,6 +37,8 @@ var menuState = {
 
     var upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     upKey.onDown.addOnce(this.start, this);
+    game.input.onDown.addOnce(this.start, this); // for touch start
+
 
     if (!localStorage.getItem('bestScore')) {
       localStorage.setItem('bestScore', 0);
