@@ -21,7 +21,7 @@ var bootState = {
       game.scale.minWidth = 250;
       game.scale.minHeight = 170;
       game.scale.maxWidth = 1000;
-      game.scale.maxHeight = 680;
+      game.scale.maxHeight = 320;
 
       // Center the gameon the screen
       game.scale.pageAlignHorizontally = true;
